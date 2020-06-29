@@ -67,3 +67,8 @@ gem 'carrierwave'
 gem 'mini_magick'
 
 gem 'font-awesome-sass', '~> 5.4.1'
+
+group :production do
+  gem 'pg', '>= 0.18', '< 2.0'
+  gem 'fog-aws'
+end
