@@ -1,0 +1,111 @@
+<div class="img">
+    <div class="container pt-3 pb-3">
+
+      <%= form_with(model: @user, local: true) do |f| %>
+          <div class="row">
+              <aside class="col-sm-4">
+                  <div>
+                    <div>
+                      <div class="text-center">
+                        <%#= form_for(@user) do |f| %>
+                          <% if @user.image? %>
+                            <%= image_tag @user.image.thumb.url, id: :img_prev, class:"icon" %>
+                          <% else %>
+                            <%= image_tag("default.jpg", id: :img_prev, class:"icon") %>
+                          <% end %>
+                        <%#  end %>
+                      
+                        <%= f.label :image, class: "main-form__image" do %>
+                          <p class="pt-3">プロフィール画像を変更する</p>
+                          <%= f.file_field :image, class: "file"%>
+                          <script type="text/javascript">
+                          $(function() {
+                           function readURL(input) {
+                             if (input.files && input.files[0]) {
+                               var reader = new FileReader();
+                               reader.onload = function (e) {
+                                 $('#img_prev').attr('src', e.target.result);
+                               }
+                               reader.readAsDataURL(input.files[0]);
+                             }
+                           }
+                           $(".file").change(function(){
+                             readURL(this);
+                           });
+                          });
+                          </script>
+                        <%  end %>
+                      </div>
+                    </div>
+                  </div>
+              </aside>
+            
+              <div class="col-sm-8 back">
+                  
+                      <div class="form-group">
+                          <%= f.label :name, 'ニックネーム' %>
+                          <%= f.text_field :name, class: 'form-control' %>
+                      </div>
+                       
+                      <div class="form-group">
+                          <%= f.label :email, 'メールアドレス' %>
+                          <%= f.email_field :email, class: 'form-control' %>
+                      </div>
+                       
+                      <div class="row">
+                          <div class="col-sm-6 form-group">
+                              <%= f.label :age, '年齢', class:'control-label' %>
+                              <%= f.select :age, [["",""], ["10代","10"], ["20代","20"], ["30代","30"], ["40代","40"], ["50代","50"], ["60代","60"], ["70代以上","70"] ], {},   class: 'form-control' %>
+                          </div>
+                           
+                          <div class="col-sm-6 form-group">
+                              <%= f.label :sex, '性別', class:'control-label' %>
+                              <%= f.select :sex, [["",""], ["女性","女性"], ["男性","男性"]], {},   class: 'form-control' %>
+                          </div>
+                      </div>
+                       
+                      <div class="form-group">
+                          <%= f.label :address, '地域（県や市など）' %>
+                          <%= f.text_field :address, class: 'form-control' %>
+                      </div>
+                       
+                       
+                      <div class="form-group">
+                          <%= f.label :introduce, '自己紹介（255文字未満）' %>
+                          <%= f.text_area :introduce, :maxlength => "255", :size => "80x5",  class: 'form-control'  %>
+                      </div>
+                      
+                      <div class="form-group">
+                        <div class="panel-group">
+                          <div class="panel panel-default">
+                            <div class="panel-heading">
+                              <div class="panel-title">
+                                <a data-toggle="collapse" href="#collapse1" class="btn btn-info btn-block">パスワードを変更する方はこちら</a>
+                              </div>
+                            </div>
+                            <div id="collapse1" class="panel-collapse collapse">
+                              <div class="panel-body">
+                                    <div class="form-group">
+                                      新しいパスワード<br>
+                                      <%= f.password_field :password, class: 'form-control' %>
+                                    </div>
+                                 
+                                    <div class="form-group">
+                                      新しいパスワードを再入力<br>
+                                      <%= f.password_field :password_confirmation, class: 'form-control' %>
+                                    </div>
+                              </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                       
+                      <div class="al-c"><%= f.submit 'プロフィール編集を完了する', class: 'btn btn-primary btn-block mb-3' %></div>
+                      <%= link_to 'アカウント削除', user_path(current_user), data: {confirm: '本当に削除してよろしいですか？'}, method: :delete, class: 'btn btn-danger btn-block mb-4' %>
+                  
+              </div> 
+           
+          </div>
+      <%  end %>
+    </div>
+</div>

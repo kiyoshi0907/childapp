@@ -1,0 +1,39 @@
+<div class="img">
+    <div class="container back pt-3 pb-3">
+      <%= form_with(model: @post, local: true) do |f| %>
+        <div class="form-group">
+          <%= f.text_area :content, class: 'form-control', rows: 10 %>
+          <%= f.label :image, class: "main-form__image" do %>
+            <i class="fa fa-image fa-lg"></i>
+            <%= f.file_field :image, class: "file"%>
+            <script type="text/javascript">
+            $(function() {
+             function readURL(input) {
+               if (input.files && input.files[0]) {
+                 var reader = new FileReader();
+                 reader.onload = function (e) {
+                   $('#img_prev').attr('src', e.target.result);
+                 }
+                 reader.readAsDataURL(input.files[0]);
+               }
+             }
+             $(".file").change(function(){
+               readURL(this);
+             });
+            });
+            </script>
+          <%  end %>
+          
+          
+          <%= f.radio_button :category, 'yonen' %>
+          <%= f.label :category, :幼年期 %>
+          <%= f.radio_button :category, 'zido' %>
+          <%= f.label :category, :児童期 %>
+          <%= f.radio_button :category, 'question' %>
+          <%= f.label :category, :質問 %>
+        </div>
+        
+        <%= f.submit 'Post', class: 'btn btn-primary btn-block mb-2' %>
+      <% end %>
+    </div>
+</div>

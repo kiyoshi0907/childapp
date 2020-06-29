@@ -1,0 +1,51 @@
+<div class="img">
+    <div class="container pt-3 pb-3">
+
+      <div class="row">
+        <aside class="col-md-4">
+          <div>
+            <div> 
+              <div class="text-center">
+                <% if @user.image? %>
+                  <%= image_tag(@user.image.thumb.to_s, class:"icon") if @user.image.present? %>
+                <% else  %>
+                  <%= image_tag("default.jpg", class:"icon") %>
+                <% end %>
+              </div>
+              <div class="text-center">
+                <h4><%= @user.name %></h4>
+                <% if current_user == @user %>
+                  <%= link_to 'プロフィール編集', edit_user_path(current_user) %>
+                <%  end %>
+                <%= render 'relationships/follow_button', user: @user %>
+              </div>
+            </div>
+          </div>
+          <div>
+            <ul class="nav nav-justified">
+              <li class="nav-item"><a href="<%= followings_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followings_user_path(@user)) %>">フォロー  <span class="badge badge-secondary"><%= @count_followings %></span></a></li>
+            　<li class="nav-item"><a href="<%= followers_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(followers_user_path(@user)) %>">フォロワー  <span class="badge badge-secondary"><%= @count_followers %></span></a></li>
+            </ul>
+            
+              <p><%= @user.address %>
+              <% if @user.age.present? %> &nbsp;<%= @user.age %>代 <% end %>
+              &nbsp;<%= @user.sex %></p>
+              <p class="orange b">自己紹介</p>
+              <p><%= @user.introduce %></p>
+          </div>
+        </aside>
+        <div class="col-md-8">
+          
+          <ul class="nav nav-tabs nav-justified ">
+            <li class="nav-item"><a href="<%= user_path(@user) %>" class="nav-link <%= 'active' if current_page?(user_path(@user)) %>">投稿</a></li>
+            <li class="nav-item"><a href="<%= media_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(media_user_path(@user)) %>">写真</a></li>
+            <li class="nav-item"><a href="<%= favorites_user_path(@user) %>" class="nav-link <%= 'active' if current_page?(favorites_user_path(@user)) %>">お気に入り</a></li>
+          </ul>
+          <div class="posts">
+            <%= render 'posts/posts', posts: @posts %>
+          </div>
+          
+        </div>
+      </div>
+    </div>
+</div>

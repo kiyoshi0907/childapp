@@ -1,0 +1,39 @@
+<ul class="list-unstyled">
+  <% posts.each do |post| %>
+    <li class="media border postcolor pr-2 pl-2 pb-2 pt-2">
+      <% if post.user.image? %>
+          <a href="<%= user_path(post.user_id) %>"><%= image_tag post.user.image.thumb50.to_s,
+                      class:"posticon mt-2 mr-2 ml-2 mb-2"%></a>
+      <% else %>
+          <a href="<%= user_path(post.user_id) %>"><%= image_tag("default.jpg", :size => "50x50", class:"rounded-circle posticon mt-2 mr-2 ml-2 mb-2")%></a>
+      <%  end %>
+      <div class="media-body">
+        <div>
+          <%= link_to post.user.name, user_path(post.user) %> <span class="text-muted">posted at <%= post.created_at %></span>
+        </div>
+        <div class="mb-3">
+          <p><%= post.content %></p>
+          <div><%= image_tag(post.image.thumb400.to_s) if post.image.present? %></div>
+        </div>
+        <div>
+          <ul class="nav">
+            <li class="nav-item mr-3"><%= render "likes/like", post: post %><%= post.like_ids.count %></li>
+            <li class="nav-item mr-4">
+              <% if current_user == post.user %>
+                <%= link_to  post, method: :delete, data: { confirm: "投稿を消します。よろしいですか？" } do %>
+                  <i class="fa fa-trash"></i>
+                <% end  %>
+              <% end %>
+            </li>
+            <li class="nav-item">
+              <%= link_to post do %>
+                <i class="fas fa-folder-open"></i>
+              <%  end %>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </li>
+  <% end %>
+  <%= paginate posts %>
+</ul>

@@ -1,0 +1,23 @@
+<% if logged_in? %>
+  <div class="img">
+    <div class="container pt-3 pb-3">
+      <ul class="nav nav-tabs nav-justified">
+        <li class="nav-item"><a href="<%= root_url %>" class="nav-link <%= 'active' if current_page?(root_url) %>">全体</a></li>
+        <li class="nav-item"><a href="<%= yonen_path %>" class="nav-link <%= 'active' if current_page?(yonen_path) %>">幼年期</a></li>
+        <li class="nav-item"><a href="<%= zido_path %>" class="nav-link <%= 'active' if current_page?(zido_path) %>">児童期</a></li>
+        <li class="nav-item"><a href="<%= question_path %>" class="nav-link <%= 'active' if current_page?(question_path) %>">質問</a></li>
+        
+      </ul>
+      <div class="posts">
+        <%= render 'posts/posts', posts: @question %>
+      </div>
+    </div>
+  </div>
+<% else %>
+  <div class="center jumbotron jumbotron-extend">
+    <div class="text-center container-fluid">
+      <h1>Welcome to the MyApp</h1>
+      <%= link_to 'Sign up now!', signup_path, class: 'btn btn-lg btn-primary' %>
+    </div>
+  </div>
+<% end %>

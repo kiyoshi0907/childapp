@@ -1,0 +1,9 @@
+<% if current_user.checkfavo?(post) %>
+  <%= link_to like_path(id: post.id), method: :delete do %>
+    <i class="fas fa-heart unlike-btn" ></i>
+  <% end %>
+<% else %>
+  <%= link_to likes_path(post_id: post.id), method: :post do %>
+    <i class="far fa-heart like-btn"></i>
+  <% end %>
+<% end %>
