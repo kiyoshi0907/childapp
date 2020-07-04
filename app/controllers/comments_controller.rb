@@ -1,4 +1,6 @@
 class CommentsController < ApplicationController
+  before_action :correct_user, only: [:destroy]
+  
   def create
     post = Post.find(params[:post_id])
     @comment = post.comments.build(comment_params)
@@ -10,6 +12,12 @@ class CommentsController < ApplicationController
       flash[:success] = "コメントできませんでした"
       redirect_back(fallback_location: root_path)
     end
+  end
+  
+  def destroy
+    @comment.destroy
+    flash[:success] = 'コメントを削除しました。'
+    redirect_back(fallback_location root_url)
   end
 
   private

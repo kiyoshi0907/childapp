@@ -27,7 +27,7 @@ class PostsController < ApplicationController
   def destroy
     @post.destroy
     flash[:success] = 'メッセージを削除しました。'
-    redirect_to root_url
+    redirect_to current_user
   end
   
   private

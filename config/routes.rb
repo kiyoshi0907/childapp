@@ -18,7 +18,7 @@ Rails.application.routes.draw do
   delete 'destroy_user', to: 'users#destroy'
   
   resources :posts, only: [:new, :show, :create, :destroy] do
-    resources :comments, only: [:create]
+    resources :comments, only: [:create, :destroy]
   end
   resources :relationships, only: [:create, :destroy]
   resources :likes, only: [:create, :destroy]

@@ -2,24 +2,35 @@
     <div class="container back pt-3 pb-3">
       <%= form_with(model: @post, local: true) do |f| %>
         <div class="form-group">
+          
           <%= f.text_area :content, class: 'form-control', rows: 10 %>
+          <img id="img1"  style="width:200px;height:100px;" />
           <%= f.label :image, class: "main-form__image" do %>
             <i class="fa fa-image fa-lg"></i>
             <%= f.file_field :image, class: "file"%>
-            <script type="text/javascript">
-            $(function() {
-             function readURL(input) {
-               if (input.files && input.files[0]) {
-                 var reader = new FileReader();
-                 reader.onload = function (e) {
-                   $('#img_prev').attr('src', e.target.result);
-                 }
-                 reader.readAsDataURL(input.files[0]);
-               }
-             }
-             $(".file").change(function(){
-               readURL(this);
-             });
+            <script>
+            $(function(){
+              $('.file').change(function(e){
+                //ファイルオブジェクトを取得する
+                var file = e.target.files[0];
+                var reader = new FileReader();
+             
+                //画像でない場合は処理終了
+                if(file.type.indexOf("image") < 0){
+                  alert("画像ファイルを指定してください。");
+                  return false;
+                }
+             
+                //アップロードした画像を設定する
+                reader.onload = (function(file){
+                  return function(e){
+                    $("#img1").attr("src", e.target.result);
+                    $("#img1").attr("title", file.name);
+                  };
+                })(file);
+                reader.readAsDataURL(file);
+             
+              });
             });
             </script>
           <%  end %>

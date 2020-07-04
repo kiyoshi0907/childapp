@@ -20,7 +20,7 @@
     position: relative;
     height: 100vh;
     min-height: 300px;
-    background: url('001.jpg') no-repeat center center;
+    background: url('006.jpg') no-repeat center center;
     background-size: cover;
     border-radius:  0;
 }
@@ -33,11 +33,12 @@
   left: 50%;  /*親要素を起点に左から50%*/
   transform: translateY(-50%) translateX(-50%); /*要素の大きさの半分ずつを戻す*/
   -webkit-transform: translateY(-50%) translateX(-50%);
-}
-.title > h3 {
-    
+  color: yellow;
 }
 
+.sign{
+  margin-top: 20vh; /*親要素を起点に上から50%*/
+}
 
 .container {
     

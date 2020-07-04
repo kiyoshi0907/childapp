@@ -13,8 +13,10 @@
               <%= link_to @post.user.name, user_path(@post.user) %> <span class="text-muted">posted at <%= @post.created_at %></span>
             </div>
             <div class="mb-3">
-              <p><%= @post.content %></p>
-              <div><%= image_tag(@post.image.thumb400.to_s) if @post.image.present? %></div>
+              <%= simple_format(@post.content) %>
+              <%=  link_to @post.image.url, 'data-lightbox': @post.image do %>
+                <%= image_tag(@post.image.thumb300.to_s) if @post.image.present? %>
+              <% end  %>
             </div>
             <div>
               <ul class="nav">
@@ -53,7 +55,7 @@
                 <% end %>      
                     <div>
                       <%= c.content %>
-                    </div> 
+                    </div>
                   </div>
               </li>
             <% end %>
