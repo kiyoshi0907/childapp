@@ -10,7 +10,7 @@
                     <%= image_tag(@user.image.thumb.to_s, class:"icon") if @user.image.present? %>
                   <% end  %>
                 <% else  %>
-                  <%= image_tag("default.jpg", :size => "150x150", class:"icon") %>
+                  <%= image_tag asset_path("default.jpg", class:"icon") %>
                 <% end %>
               </div>
               <div class="text-center">
