@@ -11,8 +11,8 @@ if Rails.env.production?
       # Amazon S3用の設定
       provider: 'AWS',
       region: ENV['ap-northeast-1'],
-      aws_access_key_id: ENV['AKIA2BKHFYCXIQRJG6HI'],
-      aws_secret_access_key: ENV['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'],
+      aws_access_key_id: ENV['AKIA2BKHFYCXKNS7DMXP'],
+      aws_secret_access_key: ENV['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'],
       path_style: true
     }
     
