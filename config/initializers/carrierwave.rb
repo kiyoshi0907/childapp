@@ -10,9 +10,9 @@ if Rails.env.production?
     config.fog_credentials = {
       # Amazon S3用の設定
       provider: 'AWS',
-      region: ENV['ap-northeast-1'],
-      aws_access_key_id: ENV['AKIA2BKHFYCXKNS7DMXP'],
-      aws_secret_access_key: ENV['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'],
+      region: 'ap-northeast-1',
+      aws_access_key_id: ENV['AWS_ACCESS_KEY_ID'],
+      aws_secret_access_key: ENV['AWS_SECRET_ACCESS_KEY'],
       path_style: true
     }
     
