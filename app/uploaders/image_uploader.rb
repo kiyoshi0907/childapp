@@ -5,9 +5,9 @@ class ImageUploader < CarrierWave::Uploader::Base
   
   #ここのシャープ外す
  
-  storage :fog
+  #storage :fog
   
-  #storage :file
+  storage :file
   
   # Choose what kind of storage to use for this uploader:
   #storage :file

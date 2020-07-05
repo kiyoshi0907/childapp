@@ -32,7 +32,7 @@
               <% if @user.age.present? %> &nbsp;<%= @user.age %>代 <% end %>
               &nbsp;<%= @user.sex %></p>
               <p class="orange b">自己紹介</p>
-              <p><%= @user.introduce %></p>
+              <%= simple_format(@user.introduce, class: "break") %>
           </div>
         </aside>
         <div class="col-md-8">

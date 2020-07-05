@@ -2,6 +2,7 @@
     <div class="container pt-3 pb-3">
 
       <%= form_with(model: @user, local: true) do |f| %>
+       <%= render 'layouts/error_messages', model: f.object %>
           <div class="row">
               <aside class="col-sm-4">
                   <div>
@@ -66,7 +67,7 @@
                        
                       <div class="form-group">
                           <%= f.label :address, '地域（県や市など）' %>
-                          <%= f.text_field :address, class: 'form-control' %>
+                          <%= f.text_field :address, :maxlength => "50", class: 'form-control' %>
                       </div>
                        
                        

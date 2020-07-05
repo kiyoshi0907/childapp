@@ -1,5 +1,15 @@
-<div class="img">
     <div class="container back pt-3 pb-3">
+        <div class="text-center mt-5 mb-5">
+          <h2>フォロー中</h2>
+        </div>
+        <% if @followings.present? %>
             <%= render 'users', users: @followings %>
+        <% else %>
+            <div class="text-center">
+              <h5>まだフォローしている人はいません</h5>
+              <% if current_user == @user %>
+                  <%= link_to '気になる人をフォローしてみよう！', users_path %>
+              <% end %>
+            </div>
+        <% end %>
     </div>
-</div>

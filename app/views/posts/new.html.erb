@@ -1,47 +1,53 @@
 <div class="img">
     <div class="container back pt-3 pb-3">
       <%= form_with(model: @post, local: true) do |f| %>
+        <%= render 'layouts/error_messages', model: f.object %>
+        
         <div class="form-group">
           
           <%= f.text_area :content, class: 'form-control', rows: 10 %>
           <img id="img1"  style="width:200px;height:100px;" />
-          <%= f.label :image, class: "main-form__image" do %>
-            <i class="fa fa-image fa-lg"></i>
-            <%= f.file_field :image, class: "file"%>
-            <script>
-            $(function(){
-              $('.file').change(function(e){
-                //ファイルオブジェクトを取得する
-                var file = e.target.files[0];
-                var reader = new FileReader();
-             
-                //画像でない場合は処理終了
-                if(file.type.indexOf("image") < 0){
-                  alert("画像ファイルを指定してください。");
-                  return false;
-                }
-             
-                //アップロードした画像を設定する
-                reader.onload = (function(file){
-                  return function(e){
-                    $("#img1").attr("src", e.target.result);
-                    $("#img1").attr("title", file.name);
-                  };
-                })(file);
-                reader.readAsDataURL(file);
-             
-              });
-            });
-            </script>
-          <%  end %>
-          
-          
-          <%= f.radio_button :category, 'yonen' %>
-          <%= f.label :category, :幼年期 %>
-          <%= f.radio_button :category, 'zido' %>
-          <%= f.label :category, :児童期 %>
-          <%= f.radio_button :category, 'question' %>
-          <%= f.label :category, :質問 %>
+          <ul class="nav">
+            <li class="nav-item mr-2 ml-1">
+              <%= f.label :image, class: "main-form__image" do %>
+                <i class="fa fa-image fa-lg"></i>
+                <%= f.file_field :image, class: "file"%>
+                <script>
+                $(function(){
+                  $('.file').change(function(e){
+                    //ファイルオブジェクトを取得する
+                    var file = e.target.files[0];
+                    var reader = new FileReader();
+                 
+                    //画像でない場合は処理終了
+                    if(file.type.indexOf("image") < 0){
+                      alert("画像ファイルを指定してください。");
+                      return false;
+                    }
+                 
+                    //アップロードした画像を設定する
+                    reader.onload = (function(file){
+                      return function(e){
+                        $("#img1").attr("src", e.target.result);
+                        $("#img1").attr("title", file.name);
+                      };
+                    })(file);
+                    reader.readAsDataURL(file);
+                 
+                  });
+                });
+                </script>
+              <%  end %>
+            </li>
+            <li class="nav-item">
+              <%= f.radio_button :category, 'yonen' %>
+              <%= f.label :category, :幼年期 %>
+              <%= f.radio_button :category, 'zido' %>
+              <%= f.label :category, :児童期 %>
+              <%= f.radio_button :category, 'question' %>
+              <%= f.label :category, :質問 %>
+            </li>
+          </ul>
         </div>
         
         <%= f.submit 'Post', class: 'btn btn-primary btn-block mb-2' %>
